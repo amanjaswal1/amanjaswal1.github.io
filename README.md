@@ -68,6 +68,8 @@ There are no ads, trackers or analytics, and no cookies. Every photograph is © 
 
 ## Licence
 
-**Photographs:** © Aman Jaswal. All rights reserved. Not for use without permission. \\
+**Photographs:** © Aman Jaswal. All rights reserved. Not for use without permission. 
+
 **Code:** no open-source licence is granted, so all rights are reserved by default.
+
 **Fonts:** under their own licences, in `assets/fonts/licenses/`.
