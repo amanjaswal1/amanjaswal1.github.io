@@ -1,6 +1,6 @@
 # AMJ · Photographs
 
-Photographs by **Aman Jaswal**, at **[amanjaswal1.github.io](https://amanjaswal1.github.io)**.
+Photographs by me, at **[amanjaswal1.github.io](https://amanjaswal1.github.io)**.
 
 ---
 
@@ -13,7 +13,7 @@ A personal photography site with two sides, **Color** and **Black & White**. Eac
 - **A photo:** opens full screen. Visitors can zoom (click, scroll or pinch), swipe or use the arrow keys to browse, copy a link, or press **Request to use** to email me about licensing it. The place it was taken is shown when known.
 - **About:** a short hello, a quote, how to get in touch, and the copyright notice.
 
-There are no ads, trackers or analytics, and no cookies. Every photograph is © Aman Jaswal, all rights reserved.
+There are no ads, trackers or analytics, and no cookies. Every photograph is © protected, all rights reserved.
 
 ---
 
@@ -64,12 +64,10 @@ There are no ads, trackers or analytics, and no cookies. Every photograph is © 
   - D. Hasler & S. Süsstrunk, *Measuring colourfulness in natural images* (2003)
   - X. Hou & L. Zhang, *Saliency Detection: A Spectral Residual Approach* (CVPR 2007)
   - D. E. Knuth & M. F. Plass, *Breaking Paragraphs into Lines* (1981)
-- Built with help from **Claude Opus 5.5** by [Anthropic](https://www.anthropic.com).
+- Built and modified using **Claude Opus 5.5** by [Anthropic](https://www.anthropic.com).
 
 ## Licence
 
-**Photographs:** © Aman Jaswal. All rights reserved. Not for use without written permission.
-
+**Photographs:** © Aman Jaswal. All rights reserved. Not for use without permission.
 **Code:** no open-source licence is granted, so all rights are reserved by default.
-
 **Fonts:** under their own licences, in `assets/fonts/licenses/`.
