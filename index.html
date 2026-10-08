@@ -84,7 +84,7 @@
     </section>
 
     <!-- ✏️ [ABOUT] The About page. ALL its words come from config.js
-         (firstName, about, quote, contactTitle, contactLine, email, instagram). -->
+         (firstName, about, quote, contactLine). Your email is NOT on the site: requests arrive through the form. -->
     <section class="view view-about" id="view-about" hidden>
       <article class="wrap about">
         <div class="about-text">
@@ -100,16 +100,12 @@
           <!-- ✏️ [QUOTE] The quote. Words: config.js → quote. -->
           <blockquote class="quote" id="quote"></blockquote>
 
-          <!-- ✏️ [CONTACT] Heading, sentence, button and email. Words: config.js → contactTitle, contactLine, email. -->
+          <!-- ✏️ [CONTACT] The "Request to use a photo" button (it opens the request form) and the fine print.
+               Optional sentence above the button: config.js → contactLine (leave "" to hide it). -->
           <section class="contact" id="licensing">
-            <h2 id="contact-title">Get in touch</h2>
-            <p class="contact-line" id="contact-line"></p>
-            <div class="contact-actions">
-              <!-- ✏️ EDIT ▸ The words on the big button. -->
-              <a class="btn" id="lic-btn" href="#">Request to use a photo <span aria-hidden="true">→</span></a>
-              <span class="contact-mail">or email <span id="lic-email" class="selectable"></span></span>
-            </div>
-            <ul class="about-links" id="about-links"></ul>
+            <p class="contact-line" id="contact-line" hidden></p>
+            <!-- ✏️ EDIT ▸ The words on the big button. -->
+            <button type="button" class="btn" data-request>Request to use a photo <span aria-hidden="true">→</span></button>
 
             <!-- ✏️ [FINE-PRINT] The small legal text. You can edit the wording here directly.
                  KEEP the last sentence: the Soria font's licence requires credit to its designer. -->
@@ -137,7 +133,7 @@
     <div class="wrap foot-in">
       <p>© <span class="years"></span> <span data-site="fullName">Aman Jaswal</span>. All rights reserved.</p>
       <!-- ✏️ EDIT ▸ The link text bottom-right. -->
-      <p><a href="#/about/licensing">Contact &amp; licensing</a></p>
+      <p><a href="#/about/licensing">Licensing</a></p>
     </div>
   </footer>
 
@@ -173,8 +169,37 @@
       <div class="lb-right">
         <span class="lb-copy" id="lb-copy"></span>
         <!-- ✏️ EDIT ▸ The words on the highlighted button under each photo. -->
-        <a class="lb-req" id="lb-req" href="#">Request to use</a>
+        <button type="button" class="lb-req" id="lb-req" data-request>Request to use</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ✏️ [REQUEST-FORM] The form that opens from every "Request to use" button.
+       Messages are emailed to you by Web3Forms (free). Your email address never appears on the site.
+       Connect it once: config.js → formKey (see SETUP.md, "Request form"). -->
+  <div class="req" id="req" hidden role="dialog" aria-modal="true" aria-labelledby="req-title">
+    <div class="req-card">
+      <button type="button" class="req-x" data-req-close aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      <!-- ✏️ EDIT ▸ Form heading and the sentence under it. -->
+      <h2 id="req-title">Request to use a photo</h2>
+      <p class="req-intro">Tell me which photo and how you'd like to use it. I'll reply by email.</p>
+      <div class="req-photo" id="req-photo" hidden></div>
+      <form id="req-form" novalidate>
+        <!-- ✏️ EDIT ▸ The labels and the grey hint text inside each box. -->
+        <label for="req-name">Your name</label>
+        <input id="req-name" name="name" autocomplete="name" required>
+        <label for="req-email">Your email</label>
+        <input id="req-email" name="email" type="email" autocomplete="email" required>
+        <label for="req-which" id="req-which-label">Which photo</label>
+        <input id="req-which" name="photo" placeholder="Paste the photo's link, or describe it">
+        <label for="req-msg">What it's for</label>
+        <textarea id="req-msg" name="message" rows="4" required placeholder="Where it will appear, print or web, how long…"></textarea>
+        <input type="checkbox" name="botcheck" class="req-trap" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <!-- ✏️ EDIT ▸ The words on the send button. -->
+        <button type="submit" class="btn req-send">Send request <span aria-hidden="true">→</span></button>
+        <p class="req-status" id="req-status" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </div>
 

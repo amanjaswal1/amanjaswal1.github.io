@@ -4,7 +4,7 @@
    THE FEW THINGS WORTH CHANGING are marked ✏️ EDIT. Search for:
      [GRID]      row height and gap of the photo grid
      [ZOOM]      how far a photo zooms when clicked
-     [EMAIL]     the subject and text of the "Request to use" email
+     [REQUEST]   the subject line and messages of the "Request to use" form
      [ROUTES]    which page changes animate
 
    Words live in config.js · looks live in assets/css/site.css.
@@ -68,16 +68,6 @@
     return DATA.sides[side].cover || ordered(DATA.photos.filter(function (p) { return p.side === side; }), "all")[0] || null;
   }
 
-  /* ✏️ EDIT [EMAIL] ▸ The email that opens when someone clicks "Request to use".
-     Change the words inside the quotes. \n means "new line". */
-  function mailto(p) {
-    var subject = p ? "Request to use a photo" : "Hello from your website";
-    var body = p
-      ? "Hi " + (CFG.firstName || "") + ",\n\nI'd like to use this photo:\n" + photoUrl(p) +
-        "\n\nWhat it's for (where, how, how long):\n\nMy name / organisation:\n\nThanks!"
-      : "Hi " + (CFG.firstName || "") + ",\n\n";
-    return "mailto:" + (CFG.email || "") + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-  }
 
   /* The order of photos = the "visual flow" worked out from the pixels when you publish
      (scripts/pixels.py in your photo repos). Similar-looking photos end up next to each other. */
@@ -103,13 +93,9 @@
     $("#about-lead").textContent = smart(CFG.about || "");
     var q = $("#quote");
     if (CFG.quote) q.textContent = "“" + smart(CFG.quote.replace(/^["“]|["”]$/g, "")) + "”"; else q.hidden = true;
-    if (CFG.contactTitle) $("#contact-title").textContent = smart(CFG.contactTitle);
-    $("#contact-line").textContent = CFG.contactLine || "";
-    $("#lic-btn").href = mailto(null);
-    $("#lic-email").textContent = CFG.email || "";
-    var links = [];
-    if (CFG.instagram) links.push('<li><a href="https://instagram.com/' + esc(String(CFG.instagram).replace(/^@/, "")) + '" target="_blank" rel="me noopener">Instagram</a></li>');
-    $("#about-links").innerHTML = links.join("");
+    var line = $("#contact-line");
+    line.textContent = CFG.contactLine || "";
+    line.hidden = !CFG.contactLine;
   }
 
   /* ───────────────────────── switching pages ───────────────────────── */
@@ -382,9 +368,7 @@
     $("#lb-where").textContent = sideCfg(p.side).label + " · " + catOf(p).title;
     $("#lb-place").textContent = showPlace ? (p.loc || "") : "";
     $("#lb-copy").textContent = "© " + photoYear(p) + " " + fullName + ". All rights reserved.";
-    var req = $("#lb-req");
-    req.hidden = CFG.showRequestButton === false;
-    req.href = mailto(p);
+    $("#lb-req").hidden = CFG.showRequestButton === false;
 
     // camera readout: only when config.js → showCameraData is true, and only the values the photo has
     var cam = $("#lb-cam"), e = p.exif || {};
@@ -551,6 +535,7 @@
     addEventListener("keydown", function (ev) {
       if (LB.el.hidden) return;
       var k = ev.key;
+      if (!REQ.el.hidden) return;                 // the request form is open on top: it handles keys itself
       if (k === "Escape") closeViewer();
       else if (k === "ArrowRight") step(1);
       else if (k === "ArrowLeft") step(-1);
@@ -572,7 +557,7 @@
   }
 
   /* ───────────────────────── light protection ───────────────────────── */
-  function protectNotice() { toast('© These photos are copyrighted. To use one, <a href="#/about/licensing">please ask first</a>.', 4800); }
+  function protectNotice() { toast('© These photos are copyrighted. To use one, <a href="#" data-request>please ask first</a>.', 4800); }
   function setupProtection() {
     if (CFG.blockRightClick === false) return;
     var onPhoto = function (t) { return t.closest && (t.closest(".tile") || t.closest("#lb-stage") || t.closest(".side-media") || t.closest(".g-hero-media") || t.closest(".about-photo")); };
@@ -582,6 +567,106 @@
       if ((ev.ctrlKey || ev.metaKey) && (ev.key || "").toLowerCase() === "s") { ev.preventDefault(); protectNotice(); }
     });
   }
+  /* ───────────────────────── [REQUEST] the "Request to use" form ─────────────────────────
+     Sends the form to Web3Forms (free), which emails it to you. Your address never appears on the site.
+     The key in config.js (formKey) is what tells Web3Forms whose inbox to deliver to. */
+  var REQ = { el: null, photo: null, closeTimer: 0, lastFocus: null };
+
+  function openRequest(p) {
+    REQ.photo = p || null;
+    REQ.lastFocus = document.activeElement;
+    clearTimeout(REQ.closeTimer);
+    REQ.el.classList.remove("closing");
+    var box = $("#req-photo"), which = $("#req-which"), whichLabel = $("#req-which-label");
+    if (p) {
+      // opened from a photo: show it, and send its link automatically
+      box.innerHTML = '<img alt="" draggable="false" src="' + esc(p.img[0].u) + '"><span>' + esc((showPlace && p.loc) || sideCfg(p.side).label + " · " + catOf(p).title) + "</span>";
+      box.hidden = false;
+      which.hidden = whichLabel.hidden = true;
+      which.value = photoUrl(p);
+    } else {
+      box.hidden = true;
+      which.hidden = whichLabel.hidden = false;
+      which.value = "";
+    }
+    setStatus("", "");
+    REQ.el.hidden = false;
+    root.classList.add("req-open");
+    setTimeout(function () { $("#req-name").focus({ preventScroll: true }); }, 60);
+  }
+  function closeRequest() {
+    if (REQ.el.hidden || REQ.el.classList.contains("closing")) return;
+    REQ.el.classList.add("closing");
+    REQ.closeTimer = setTimeout(function () {
+      REQ.el.hidden = true;
+      REQ.el.classList.remove("closing");
+      root.classList.remove("req-open");
+      if (REQ.lastFocus && REQ.lastFocus.focus) REQ.lastFocus.focus({ preventScroll: true });
+    }, reduceMotion ? 0 : 320);
+  }
+  function setStatus(text, kind) {
+    var st = $("#req-status");
+    st.textContent = text;
+    st.className = "req-status" + (kind ? " " + kind : "");
+  }
+  function sendRequest(ev) {
+    ev.preventDefault();
+    var form = $("#req-form"), btn = $(".req-send");
+    var name = $("#req-name").value.trim(), email = $("#req-email").value.trim(), msg = $("#req-msg").value.trim();
+    /* ✏️ EDIT [REQUEST] ▸ The messages people see after pressing "Send request". */
+    var T = {
+      missing: "Please fill in your name, a valid email and what it's for.",
+      sending: "Sending…",
+      sent: "Thank you! Your request was sent. I'll get back to you by email.",
+      failed: "Sorry, that didn't send. Please try again in a minute.",
+      notReady: "This form isn't connected yet. (Site owner: add your Web3Forms key in config.js → formKey.)",
+    };
+    if (!name || !msg || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { setStatus(T.missing, "err"); return; }
+    if (!CFG.formKey) { setStatus(T.notReady, "err"); return; }
+    if (form.botcheck.checked) { setStatus(T.sent, "ok"); return; }   // a spam bot ticked the hidden box: pretend, send nothing
+    var p = REQ.photo;
+    /* ✏️ EDIT [REQUEST] ▸ The subject line of the email you receive. */
+    var subject = "Photo request" + (p ? ": " + ((p.loc || "") + " (" + p.id + ")").trim() : "") + " from " + name;
+    btn.disabled = true;
+    setStatus(T.sending, "");
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        access_key: CFG.formKey,
+        subject: subject,
+        from_name: (CFG.monogram || "Photo") + " website",
+        name: name,
+        email: email,
+        photo: $("#req-which").value.trim() || "(not given)",
+        message: msg,
+        botcheck: false,
+      }),
+    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return r.ok && j.success !== false; }); })
+      .then(function (ok) {
+        if (ok) { setStatus(T.sent, "ok"); form.reset(); setTimeout(closeRequest, 2600); }
+        else setStatus(T.failed, "err");
+      })
+      .catch(function () { setStatus(T.failed, "err"); })
+      .then(function () { btn.disabled = false; });
+  }
+  function setupRequest() {
+    REQ.el = $("#req");
+    document.addEventListener("click", function (ev) {
+      var opener = ev.target.closest("[data-request]");
+      if (opener) {
+        ev.preventDefault();
+        openRequest(opener.id === "lb-req" && !LB.el.hidden ? LB.list[LB.idx] : null);
+        return;
+      }
+      if (!REQ.el.hidden && (ev.target === REQ.el || ev.target.closest("[data-req-close]"))) closeRequest();
+    });
+    $("#req-form").addEventListener("submit", sendRequest);
+    addEventListener("keydown", function (ev) {
+      if (!REQ.el.hidden && ev.key === "Escape") { ev.preventDefault(); closeRequest(); }
+    });
+  }
+
   var toastTimer;
   function toast(html, ms) {
     var t = $("#toast");
@@ -639,6 +724,7 @@
     fillSiteText();
     setupViewer();
     setupProtection();
+    setupRequest();
     grid.addEventListener("click", function (ev) { if (ev.target.closest(".tile")) LB.cameFromGrid = true; });
     $("#menu-btn").addEventListener("click", function () {
       var on = root.classList.toggle("menu-open");

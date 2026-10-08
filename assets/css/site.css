@@ -13,6 +13,7 @@
      [ABOUT-TITLE] [ABOUT-TEXT] [QUOTE] [CONTACT] [FINE-PRINT] [ABOUT-PHOTO]
      [FOOTER]       the line at the very bottom
      [VIEWER] [VIEWER-BAR] [REQUEST-BUTTON] [CAMERA-READOUT]   the full-screen photo view
+     [REQUEST-FORM] the "Request to use" form
      [PAGE-ANIMATION]  the open/close animation between pages
      [PHONES]       everything that changes on small screens
 
@@ -239,19 +240,11 @@ html[data-view="gallery"]:not(.past-hero) .masthead { background: transparent; c
 .about-lead { margin-top: 30px; font: 400 clamp(22px, 2.1vw, 30px)/1.38 var(--display); color: var(--fg); max-width: 32ch; text-wrap: pretty; }
 /* ✏️ [QUOTE] The quote: size, colour (--fg-2 = softer text) and the thin line on its left. */
 .quote { margin-top: 36px; padding-left: 22px; border-left: 2px solid var(--line); font: 400 clamp(20px, 1.8vw, 26px)/1.4 var(--display); color: var(--fg-2); max-width: 30ch; }
-/* ✏️ [CONTACT] Space above the contact section (first number) and its heading size. */
-.contact { margin-top: clamp(56px, 8vw, 110px); padding-top: 32px; border-top: 1px solid var(--line); }
-.contact h2 { font: 400 clamp(28px, 2.6vw, 38px)/1.1 var(--display); }
-.contact-line { margin-top: 14px; max-width: 54ch; color: var(--fg-2); font-size: 17px; }
-.contact-actions { display: flex; align-items: center; gap: 12px 20px; flex-wrap: wrap; margin-top: 26px; }
-.contact-mail { font-size: 14px; color: var(--mu); }
-.contact-mail .selectable { color: var(--fg); }
-.about-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-.about-links:empty { display: none; }
-.about-links a { display: inline-block; padding: 10px 16px; border: 1px solid var(--line); border-radius: 999px; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; transition: background-color .35s var(--ease), color .35s var(--ease); }
-.about-links a:hover { background: var(--fg); color: var(--bg); }
+/* ✏️ [CONTACT] Space above the button section (first number) and the optional sentence above the button. */
+.contact { margin-top: clamp(56px, 8vw, 110px); padding-top: 36px; border-top: 1px solid var(--line); }
+.contact-line { margin-bottom: 22px; max-width: 54ch; color: var(--fg-2); font-size: 17px; }
 /* ✏️ [CONTACT] The big dark button: colours come from --fg (button) and --bg (text). */
-.btn { display: inline-flex; align-items: center; gap: 12px; padding: 15px 24px; background: var(--fg); color: var(--bg); border-radius: 999px; font: 500 11.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; transition: gap .45s var(--ease), opacity .3s var(--ease), transform .45s var(--ease); }
+.btn { cursor: pointer; display: inline-flex; align-items: center; gap: 12px; padding: 15px 24px; background: var(--fg); color: var(--bg); border-radius: 999px; font: 500 11.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; transition: gap .45s var(--ease), opacity .3s var(--ease), transform .45s var(--ease); }
 .btn:hover { gap: 18px; transform: translateY(-1px); }
 /* ✏️ [FINE-PRINT] The small legal text: size 11.5px. */
 .fine { margin-top: 40px; max-width: 78ch; font-size: 11.5px; line-height: 1.7; color: var(--mu); }
@@ -312,7 +305,7 @@ html.lb-open, html.lb-open body { overflow: hidden; }
 /* ✏️ [VIEWER-BAR] "© 2025 Aman Jaswal. All rights reserved.": size 12.5px. */
 .lb-copy { font-size: 12.5px; color: #8f897d; }
 /* ✏️ [REQUEST-BUTTON] The highlighted "Request to use" button: background, text colour, size. */
-.lb-req { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border-radius: 999px; background: #f2efe8; color: #111; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; transition: background-color .3s var(--ease), transform .45s var(--ease), box-shadow .45s var(--ease); }
+.lb-req { cursor: pointer; display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border-radius: 999px; background: #f2efe8; color: #111; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; transition: background-color .3s var(--ease), transform .45s var(--ease), box-shadow .45s var(--ease); }
 .lb-req::after { content: "→"; transition: transform .45s var(--ease); }
 .lb-req:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255, 255, 255, .12); }
 .lb-req:hover::after { transform: translateX(3px); }
@@ -322,6 +315,38 @@ html.lb-open, html.lb-open body { overflow: hidden; }
 .lb-cam { display: flex; gap: 6px 18px; flex-wrap: wrap; padding: 9px 14px; border-radius: 10px; background: #050505; box-shadow: inset 0 0 0 1px #262521; }
 .lb-cam span { font: 400 9px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #6a655c; }
 .lb-cam b { display: block; margin-bottom: 4px; font: 500 15px/1 var(--mono); letter-spacing: -.01em; color: var(--amber); text-shadow: 0 0 10px rgba(255,182,72,.4); text-transform: none; }
+
+
+/* ───────────────────────── [REQUEST-FORM] ───────────────────────── */
+html.req-open, html.req-open body { overflow: hidden; }
+/* ✏️ [REQUEST-FORM] The dark see-through layer behind the form (.55 = how dark). */
+.req { position: fixed; inset: 0; z-index: 150; display: grid; place-items: center; padding: 16px; background: rgba(8, 8, 7, .55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: lbIn .4s var(--ease) both; }
+.req.closing { animation: lbOut .32s var(--ease) both; }
+/* ✏️ [REQUEST-FORM] The card: width (460px), background (--paper), corner roundness (16px). */
+.req-card { position: relative; width: min(100%, 460px); max-height: calc(100vh - 32px); overflow-y: auto; padding: 30px 28px 26px; border-radius: 16px; background: var(--paper); color: var(--ink); box-shadow: 0 30px 80px rgba(0,0,0,.45); animation: cardIn .55s var(--ease) both; }
+.req.closing .req-card { animation: cardOut .32s var(--ease) both; }
+@keyframes cardIn { from { opacity: 0; transform: translateY(18px) scale(.98); } }
+@keyframes cardOut { to { opacity: 0; transform: translateY(10px) scale(.99); } }
+.req-x { position: absolute; top: 12px; right: 12px; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); transition: background-color .3s var(--ease), color .3s var(--ease); }
+.req-x:hover { background: var(--paper-2); color: var(--ink); }
+.req-x svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; }
+/* ✏️ [REQUEST-FORM] Heading size (30px) and the sentence under it. */
+.req h2 { padding-right: 36px; font: 400 30px/1.1 var(--display); }
+.req-intro { margin-top: 10px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+.req-photo { display: flex; align-items: center; gap: 12px; margin-top: 18px; padding: 8px; border-radius: 10px; background: var(--paper-2); font-size: 14px; color: var(--ink-2); }
+.req-photo img { width: 64px; height: 46px; object-fit: cover; border-radius: 4px; flex: 0 0 auto; -webkit-user-drag: none; }
+.req form { display: grid; gap: 6px; margin-top: 18px; }
+.req label { margin-top: 8px; font: 500 10.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.req input, .req textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--rule); border-radius: 10px; background: #fbfaf6; color: var(--ink); font: 400 15px/1.4 var(--sans); transition: border-color .3s var(--ease), box-shadow .3s var(--ease); }
+.req textarea { resize: vertical; min-height: 96px; }
+.req input::placeholder, .req textarea::placeholder { color: #a9a294; }
+.req input:focus, .req textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(22, 21, 19, .08); }
+.req .req-trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.req-send { justify-self: start; margin-top: 16px; background: var(--ink); color: var(--paper); cursor: pointer; }
+.req-send:disabled { opacity: .55; cursor: wait; }
+.req-status { min-height: 1.4em; margin-top: 6px; font-size: 14px; line-height: 1.45; color: var(--ink-2); }
+.req-status.ok { color: #2f6b3c; }    /* ✏️ colour of the "sent" message */
+.req-status.err { color: #a3331f; }   /* ✏️ colour of error messages */
 
 
 /* ───────────────────────── small notice (copyright, link copied) ───────────────────────── */
