@@ -35,19 +35,18 @@ window.SITE = {
   quote: "",
 
   // ✏️ EDIT ▸ The heading of the contact section on the About page.
-  contactTitle: "Get in touch",
+  // contactTitle: "Get in touch",
 
   // ✏️ EDIT ▸ The sentence above your email and the "Request to use" button.
   contactLine: "Want to use a photograph, have a question, or just say hello? Feel free to get in touch.",
 
+  /* ───────────── REQUEST FORM (your email stays private) ───────────── */
 
-  /* ───────────── CONTACT ───────────── */
+  // ✏️ EDIT ▸ Your Web3Forms access key (safe to be public; it is NOT your email).
+  formKey: "a8daebe4-0214-4bf5-8c00-cb537271683c",
 
-  // ✏️ EDIT ▸ YOUR EMAIL. EVERY "Request to use" button opens an email to this address.
-  email: "ajaswal@lakeheadu.ca",
-
-  // ✏️ EDIT ▸ Your Instagram handle without the @, e.g. "amj.photos". Leave "" to hide the button.
-  instagram: "aman.jaswal__",
+  // ✏️ EDIT ▸ Optional sentence above the "Request to use a photo" button. "" = just the button.
+  contactLine: "",
 
 
   /* ───────────── THE TWO SIDES ───────────── */
