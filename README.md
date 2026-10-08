@@ -1,6 +1,6 @@
-# AMJ · Photographs
+# Photography Portfolio
 
-Photographs by me, at **[amanjaswal1.github.io](https://amanjaswal1.github.io)**.
+My portfolio, at **[amanjaswal1.github.io](https://amanjaswal1.github.io)**.
 
 ---
 
