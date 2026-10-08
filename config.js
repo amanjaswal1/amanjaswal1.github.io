@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   ✏️  CONFIG.JS: EVERY WORD ON THE  WEBSITE LIVES WITHININ THIS FILE.
+   ✏️  CONFIG.JS: EVERY WORD ON THE WEBSITE LIVES IN THIS FILE.
 
    HOW TO EDIT (on github.com):
      1. Open this file → click the pencil icon (top right of the file).
@@ -14,7 +14,7 @@ window.SITE = {
   /* ───────────── YOUR NAME ───────────── */
 
   // ✏️ EDIT ▸ The letters in the top-left corner of every page.
-  monogram: "AMJ | Photography",
+  monogram: "AMJ",
 
   // ✏️ EDIT ▸ Your first name. Shows as the About page heading: "Hi, I'm Aman."
   firstName: "Aman",
@@ -22,30 +22,26 @@ window.SITE = {
   // ✏️ EDIT ▸ Your full name. Used in every "© 2026 Aman Jaswal. All rights reserved." line.
   fullName: "Aman Jaswal",
 
-  // ✏️ EDIT ▸ The year of your oldest photo. The footer reads "© 2017–2026 Aman Jaswal".
+  // ✏️ EDIT ▸ The year of your oldest photo. The footer reads "© 2014–2026 Aman Jaswal".
   firstYear: 2014,
 
 
   /* ───────────── ABOUT PAGE ───────────── */
 
   // ✏️ EDIT ▸ The paragraph under "Hi, I'm Aman.".
-  about: "Photography is a hobby, and this is where I'm trying to keep track of my work. I like capturing moments and little details that draw my attention. Occasionally, I even know what I'm doing. This site is a collection of the photographs I've taken along the way.",
+  about: "Photography has been a hobby of mine for over a decade, or, if we're counting from when I was 13, for considerably longer than I'd care to admit. I like noticing the moments, places, and little details that catch my eye and holding on to them for a while. Occasionally, I even know what I'm doing. This site is a collection of the photographs I've taken along the way.",
 
   // ✏️ EDIT ▸ The quote on the About page. Put "" (two quotes, nothing inside) to hide it.
   quote: "",
 
-  // ✏️ EDIT ▸ The heading of the contact section on the About page.
-  // contactTitle: "Get in touch",
-
-  // ✏️ EDIT ▸ The sentence above your email and the "Request to use" button.
-  contactLine: "Want to use a photograph, have a question, or just say hello? Feel free to get in touch.",
 
   /* ───────────── REQUEST FORM (your email stays private) ───────────── */
 
   // ✏️ EDIT ▸ Your Web3Forms access key (safe to be public; it is NOT your email).
   formKey: "a8daebe4-0214-4bf5-8c00-cb537271683c",
 
-  // ✏️ EDIT ▸ Optional sentence above the "Request to use a photo" button. "" = just the button.
+  // ✏️ EDIT ▸ Optional sentence above the "Request to use a photo" button on the About page.
+  //   Leave "" (empty) to show just the button.
   contactLine: "",
 
 
