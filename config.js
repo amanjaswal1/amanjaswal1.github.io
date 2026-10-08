@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════════
-   ✏️  CONFIG.JS: EVERY WORD ON YOUR SITE LIVES IN THIS FILE.
+   ✏️  CONFIG.JS: EVERY WORD ON THE  WEBSITE LIVES WITHININ THIS FILE.
 
    HOW TO EDIT (on github.com):
      1. Open this file → click the pencil icon (top right of the file).
@@ -23,31 +23,31 @@ window.SITE = {
   fullName: "Aman Jaswal",
 
   // ✏️ EDIT ▸ The year of your oldest photo. The footer reads "© 2017–2026 Aman Jaswal".
-  firstYear: 2017,
+  firstYear: 2014,
 
 
   /* ───────────── ABOUT PAGE ───────────── */
 
   // ✏️ EDIT ▸ The paragraph under "Hi, I'm Aman.".
-  about: "Photography is my hobby. I love travelling, and I love making photographs along the way. This is where I keep them.",
+  about: "Photography is a hobby, and this is where I'm trying to keep track of my work. I like capturing moments and little details that draw my attention. Occasionally, I even know what I'm doing. This site is a collection of the photographs I've taken along the way.",
 
   // ✏️ EDIT ▸ The quote on the About page. Put "" (two quotes, nothing inside) to hide it.
-  quote: "Photographs are my way of speaking to the world without saying a word.",
+  quote: "",
 
   // ✏️ EDIT ▸ The heading of the contact section on the About page.
   contactTitle: "Get in touch",
 
   // ✏️ EDIT ▸ The sentence above your email and the "Request to use" button.
-  contactLine: "Please reach out if you'd like to use one of my photographs, or if you'd simply like to get in touch.",
+  contactLine: "Want to use a photograph, have a question, or just say hello? Feel free to get in touch.",
 
 
   /* ───────────── CONTACT ───────────── */
 
   // ✏️ EDIT ▸ YOUR EMAIL. EVERY "Request to use" button opens an email to this address.
-  email: "you@example.com",
+  email: "ajaswal@lakeheadu.ca",
 
   // ✏️ EDIT ▸ Your Instagram handle without the @, e.g. "amj.photos". Leave "" to hide the button.
-  instagram: "",
+  instagram: "aman.jaswal__",
 
 
   /* ───────────── THE TWO SIDES ───────────── */
@@ -82,5 +82,5 @@ window.SITE = {
 
   // ✏️ EDIT ▸ How long opening a side (and going back) takes, in milliseconds.
   //   700 = smooth (default) · 500 = snappier · 1000 = slow and dramatic
-  pageTransitionMs: 700,
+  pageTransitionMs: 750,
 };
