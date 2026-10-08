@@ -1,0 +1,184 @@
+<!doctype html>
+<!--
+  ═══════════════════════════════════════════════════════════════════════════
+  ✏️  INDEX.HTML: THE SKELETON OF EVERY PAGE.
+
+  • WORDS (your name, About text, email…)  → change them in config.js, NOT here.
+  • SIZES, COLOURS, SPACING                 → change them in assets/css/site.css.
+    Every block below has a [TAG]. Search site.css for the same [TAG]
+    to resize or recolour that exact thing.
+  • Search this file for ✏️ to find every spot you can change.
+
+  Credits are in README.md. Typeface "Soria" by Bydani, CC BY-ND 4.0.
+  ═══════════════════════════════════════════════════════════════════════════
+-->
+<html lang="en" data-tone="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <!-- ✏️ EDIT ▸ The name shown in the browser tab and in Google results. -->
+  <title>AMJ · Photographs</title>
+
+  <!-- ✏️ EDIT ▸ The one-line description Google shows under your site's name. -->
+  <meta name="description" content="Photographs by Aman Jaswal, in colour and black & white.">
+
+  <!-- Tells AI-training crawlers not to use the photos. Leave these two lines alone. -->
+  <meta name="robots" content="noai, noimageai">
+  <meta name="tdm-reservation" content="1">
+
+  <meta name="theme-color" content="#0d0d0c">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/soria.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="config.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ✏️ [TOP-BAR] The bar at the top of every page: "AMJ" on the left, menu on the right.
+       The letters come from config.js → monogram. Menu words come from config.js → sides. -->
+  <header class="masthead">
+    <a class="monogram" href="#/" aria-label="Home" data-site="monogram">AMJ</a>
+    <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav"><i aria-hidden="true"></i>Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#/color" data-nav="color"><span data-side-short="color">Color</span></a>
+      <a href="#/bw" data-nav="bw"><span data-side-short="bw">B&amp;W</span></a>
+      <!-- ✏️ EDIT ▸ The word "About" in the menu. -->
+      <a href="#/about" data-nav="about">About</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ✏️ [HOME] The front page: the two sides. It is built automatically from your two
+         cover photos (the _cover folder in each photo repo). Sizes: search site.css for [HOME]. -->
+    <section class="view view-home" id="view-home" hidden>
+      <div class="split" id="split"></div>
+    </section>
+
+    <!-- ✏️ [SIDE-HERO] Top of each side: your cover photo with the big title on it.
+         [SIDE-TABS] The row of set names under it (All · Category 1 · …). Rename sets by renaming
+         the folders in your photo repo. [GRID] The photos themselves, ordered automatically. -->
+    <section class="view view-gallery" id="view-gallery" hidden>
+      <header class="g-hero">
+        <div class="g-hero-media" id="g-hero-media"></div>
+        <div class="g-hero-in wrap">
+          <div class="g-title">
+            <span class="kicker" id="g-kicker"></span>
+            <h1 id="g-h1"></h1>
+          </div>
+          <div class="flip" role="group" aria-label="Switch side">
+            <a href="#/color" class="flip-opt" data-flip="color" data-side-short="color">Color</a>
+            <a href="#/bw" class="flip-opt" data-flip="bw" data-side-short="bw">B&amp;W</a>
+            <span class="flip-knob" aria-hidden="true"></span>
+          </div>
+        </div>
+      </header>
+      <nav class="tabs wrap" id="g-tabs" aria-label="Sets"></nav>
+      <p class="g-desc wrap" id="g-desc" hidden></p>
+      <div class="wrap"><div class="grid" id="grid"></div></div>
+      <!-- ✏️ EDIT ▸ What a side says while it has no photos yet. -->
+      <p class="g-empty wrap" id="g-empty" hidden>No photographs here yet.</p>
+    </section>
+
+    <!-- ✏️ [ABOUT] The About page. ALL its words come from config.js
+         (firstName, about, quote, contactTitle, contactLine, email, instagram). -->
+    <section class="view view-about" id="view-about" hidden>
+      <article class="wrap about">
+        <div class="about-text">
+          <!-- ✏️ EDIT ▸ The small word above the heading. -->
+          <span class="kicker">About</span>
+
+          <!-- ✏️ [ABOUT-TITLE] "Hi, I'm Aman." Change its size in site.css → [ABOUT-TITLE]. -->
+          <h1>Hi, I’m <span data-site="firstName">Aman</span>.</h1>
+
+          <!-- ✏️ [ABOUT-TEXT] The paragraph. Words: config.js → about. -->
+          <p class="about-lead" id="about-lead"></p>
+
+          <!-- ✏️ [QUOTE] The quote. Words: config.js → quote. -->
+          <blockquote class="quote" id="quote"></blockquote>
+
+          <!-- ✏️ [CONTACT] Heading, sentence, button and email. Words: config.js → contactTitle, contactLine, email. -->
+          <section class="contact" id="licensing">
+            <h2 id="contact-title">Get in touch</h2>
+            <p class="contact-line" id="contact-line"></p>
+            <div class="contact-actions">
+              <!-- ✏️ EDIT ▸ The words on the big button. -->
+              <a class="btn" id="lic-btn" href="#">Request to use a photo <span aria-hidden="true">→</span></a>
+              <span class="contact-mail">or email <span id="lic-email" class="selectable"></span></span>
+            </div>
+            <ul class="about-links" id="about-links"></ul>
+
+            <!-- ✏️ [FINE-PRINT] The small legal text. You can edit the wording here directly.
+                 KEEP the last sentence: the Soria font's licence requires credit to its designer. -->
+            <p class="fine">
+              © <span class="years"></span> <span data-site="fullName">Aman Jaswal</span>. All rights reserved. These photographs are protected by
+              Canada's <em>Copyright Act</em> (R.S.C. 1985, c.&nbsp;C&#8209;42) and, through international treaties, in most other countries.
+              Copying, downloading, editing, reposting or otherwise using them, including to train AI systems, without written permission
+              is infringement. Under section 38.1 of the Act a court may award statutory damages of $500 to $20,000 per photograph for
+              infringement for commercial purposes. Copyright information is embedded in every image file; knowingly removing or altering
+              it to conceal infringement is separately prohibited (section 41.22).
+              <br><br>
+              Typeface: <a href="https://www.behance.net/danibydani" target="_blank" rel="noopener">Soria by Bydani</a>,
+              <a href="https://creativecommons.org/licenses/by-nd/4.0/" target="_blank" rel="noopener">CC BY-ND 4.0</a> (converted to WOFF2 for the web, design unchanged).
+            </p>
+          </section>
+        </div>
+        <!-- ✏️ [ABOUT-PHOTO] The photo beside the text (wide screens only). It uses your Color cover. -->
+        <figure class="about-photo" id="about-photo" aria-hidden="true"></figure>
+      </article>
+    </section>
+  </main>
+
+  <!-- ✏️ [FOOTER] The line at the very bottom of the side and About pages. -->
+  <footer class="foot" id="foot">
+    <div class="wrap foot-in">
+      <p>© <span class="years"></span> <span data-site="fullName">Aman Jaswal</span>. All rights reserved.</p>
+      <!-- ✏️ EDIT ▸ The link text bottom-right. -->
+      <p><a href="#/about/licensing">Contact &amp; licensing</a></p>
+    </div>
+  </footer>
+
+  <!-- ✏️ [VIEWER] The full-screen view when someone clicks a photo. -->
+  <div class="lb" id="lb" hidden tabindex="-1" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <div class="lb-top">
+      <div class="lb-count"><span id="lb-no">01</span><span class="lb-of">/</span><span id="lb-total">01</span><span class="lb-where" id="lb-where"></span></div>
+      <div class="lb-actions">
+        <button type="button" class="lb-btn" data-act="zoom" aria-label="Zoom (Z)" title="Zoom (Z)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6"/></svg></button>
+        <button type="button" class="lb-btn" data-act="share" aria-label="Copy link to this photo" title="Copy link">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a4.5 4.5 0 0 0 6.4 0l3-3a4.5 4.5 0 0 0-6.4-6.4l-1 1"/><path d="M14 10a4.5 4.5 0 0 0-6.4 0l-3 3a4.5 4.5 0 0 0 6.4 6.4l1-1"/></svg></button>
+        <button type="button" class="lb-btn" data-act="close" aria-label="Close (Esc)" title="Close (Esc)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </div>
+    </div>
+    <div class="lb-stage" id="lb-stage">
+      <img id="lb-img" alt="" draggable="false">
+      <div class="lb-shield" aria-hidden="true"></div>
+      <button type="button" class="lb-nav prev" data-act="prev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="lb-nav next" data-act="next" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="lb-zoomtag" id="lb-zoomtag" aria-hidden="true">1.0×</div>
+    </div>
+    <!-- ✏️ [VIEWER-BAR] Under the photo: place (left), © line + highlighted [REQUEST-BUTTON] (right).
+         Turn the place / camera readout / button on or off in config.js → SWITCHES. -->
+    <div class="lb-bar">
+      <div class="lb-left">
+        <p class="lb-place" id="lb-place"></p>
+        <div class="lb-cam" id="lb-cam" hidden></div>
+      </div>
+      <div class="lb-right">
+        <span class="lb-copy" id="lb-copy"></span>
+        <!-- ✏️ EDIT ▸ The words on the highlighted button under each photo. -->
+        <a class="lb-req" id="lb-req" href="#">Request to use</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><p class="noscript">This site needs JavaScript to show the photographs. © All rights reserved.</p></noscript>
+</body>
+</html>

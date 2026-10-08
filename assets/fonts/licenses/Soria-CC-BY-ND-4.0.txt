@@ -1,0 +1,10 @@
+Soria
+Copyright (c) 2016 by Bydani. All rights reserved.
+Designer: Bydani — https://www.behance.net/danibydani
+Download: https://www.fontsquirrel.com/fonts/soria  ·  https://bydani.gumroad.com/l/uLSbM
+
+Licensed under Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0):
+https://creativecommons.org/licenses/by-nd/4.0/
+
+Changes made: the original soria-font.ttf was converted to soria.woff2 for use on the web
+(a format change only, permitted by section 2(a)(4) of the licence). The design is unchanged.

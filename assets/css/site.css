@@ -1,0 +1,398 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ✏️  SITE.CSS: HOW EVERYTHING LOOKS (sizes, colours, spacing, animation).
+
+   FIND THINGS FAST: press Ctrl+F (⌘F on Mac) and search for a [TAG]:
+     [FONTS]        the typefaces
+     [COLOURS]      every colour on the site
+     [SPEED]        how fast things move
+     [TOP-BAR]      "AMJ" + menu
+     [HOME]         the front page with the two sides
+     [SIDE-HERO]    the cover + big title at the top of each side
+     [SIDE-TABS]    the row of set names
+     [GRID]         the photo grid
+     [ABOUT-TITLE] [ABOUT-TEXT] [QUOTE] [CONTACT] [FINE-PRINT] [ABOUT-PHOTO]
+     [FOOTER]       the line at the very bottom
+     [VIEWER] [VIEWER-BAR] [REQUEST-BUTTON] [CAMERA-READOUT]   the full-screen photo view
+     [PAGE-ANIMATION]  the open/close animation between pages
+     [PHONES]       everything that changes on small screens
+
+   SIZE TIP: clamp(MIN, PREFERRED, MAX) means "PREFERRED size, but never smaller than MIN or
+   bigger than MAX". vw = % of screen width (10vw = a tenth of the screen). To make something
+   bigger, raise all three numbers a little.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+
+/* ───────────────────────── [FONTS] ─────────────────────────
+   ✏️ All fonts are stored on your own site in assets/fonts/ (nothing loads from Google).
+   Soria (headings) by Bydani, CC BY-ND 4.0 · Inter Tight (text) & IBM Plex Mono (small labels), SIL OFL.
+   ✏️ To use a different heading font: put its .woff2 in assets/fonts/ and change the file name below. */
+@font-face { font-family: "Soria"; src: url("../fonts/soria.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter Tight"; font-weight: 400; font-display: swap; src: url("../fonts/inter-tight-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Inter Tight"; font-weight: 400; font-display: swap; src: url("../fonts/inter-tight-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Inter Tight"; font-weight: 500; font-display: swap; src: url("../fonts/inter-tight-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Inter Tight"; font-weight: 500; font-display: swap; src: url("../fonts/inter-tight-latin-ext-500-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "Inter Tight"; font-weight: 600; font-display: swap; src: url("../fonts/inter-tight-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "Inter Tight"; font-weight: 600; font-display: swap; src: url("../fonts/inter-tight-latin-ext-600-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; font-display: swap; src: url("../fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; font-display: swap; src: url("../fonts/ibm-plex-mono-latin-ext-400-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-display: swap; src: url("../fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; font-display: swap; src: url("../fonts/ibm-plex-mono-latin-ext-500-normal.woff2") format("woff2"); unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+
+:root {
+  /* ✏️ [FONTS] Which font is used where. The first name is used; the rest are backups. */
+  --display: "Soria", "Iowan Old Style", "Palatino Linotype", Georgia, serif;   /* big headings */
+  --sans: "Inter Tight", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;   /* normal text */
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;   /* small capital labels */
+
+  /* ✏️ [COLOURS] Colour side & About = "paper" colours. Home, B&W side & photo viewer = "dark" colours.
+     Colours are hex codes: #000000 is black, #ffffff is white. */
+  --paper: #f2efe8;      /* ✏️ background of the Color side & About page */
+  --paper-2: #e7e2d8;    /* ✏️ buttons / chips on paper */
+  --ink: #161513;        /* ✏️ main text on paper */
+  --ink-2: #4a463f;      /* ✏️ softer text on paper */
+  --muted: #7d776c;      /* ✏️ quiet text on paper (small labels) */
+  --rule: #d8d1c3;       /* ✏️ thin lines on paper */
+  --dark: #0d0d0c;       /* ✏️ background of the B&W side */
+  --dark-3: #1f1e1c;     /* ✏️ buttons / chips on dark */
+  --d-ink: #ece7dd;      /* ✏️ main text on dark */
+  --d-ink-2: #bdb7aa;    /* ✏️ softer text on dark */
+  --d-muted: #8b867b;    /* ✏️ quiet text on dark */
+  --d-rule: #2a2926;     /* ✏️ thin lines on dark */
+  --viewer-bg: #090908;  /* ✏️ background behind a photo when it's opened */
+  --amber: #ffb648;      /* ✏️ camera readout numbers (only if showCameraData is on) */
+
+  /* ✏️ [SPEED] How things move. --page-ms is set from config.js (pageTransitionMs). */
+  --page-ms: 700ms;                               /* opening a side / going back */
+  --hover-ms: 800ms;                              /* the two sides growing/shrinking on hover */
+  --ease: cubic-bezier(.22, .61, .21, 1);         /* the "feel" of every movement: smooth start, soft landing */
+
+  /* ✏️ Space on the left and right of every page: clamp(phone, normal, big screens) */
+  --gutter: clamp(16px, 4vw, 48px);
+  --head-h: 64px;        /* ✏️ height of the top bar */
+
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+
+  /* (dark is the default; the site switches to paper on the Color side and About page) */
+  --bg: var(--dark); --bg-glass: rgba(13, 13, 12, .84); --fg: var(--d-ink); --fg-2: var(--d-ink-2);
+  --mu: var(--d-muted); --line: var(--d-rule); --chip: var(--dark-3);
+  color-scheme: dark;
+}
+html[data-tone="paper"] {
+  --bg: var(--paper); --bg-glass: rgba(242, 239, 232, .86); --fg: var(--ink); --fg-2: var(--ink-2);
+  --mu: var(--muted); --line: var(--rule); --chip: var(--paper-2);
+  color-scheme: light;
+}
+
+/* ───────────────────────── basics (no need to touch) ───────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh;
+  background: var(--bg) var(--grain) repeat; color: var(--fg);
+  font: 400 16px/1.55 var(--sans);
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+  transition: background-color .6s var(--ease), color .6s var(--ease);
+}
+h1, h2, p, ul, blockquote, figure { margin: 0; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+img { max-width: 100%; }
+.wrap { padding-inline: var(--gutter); max-width: 1680px; margin-inline: auto; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 3px; }
+.skip { position: absolute; left: -999px; top: 8px; z-index: 300; background: var(--fg); color: var(--bg); padding: 8px 12px; }
+.skip:focus { left: 8px; }
+.selectable { user-select: all; -webkit-user-select: all; }
+.kicker { font: 500 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--mu); }
+.kicker b { font-weight: 500; color: var(--fg); }
+.kicker .bar { display: inline-block; margin: 0 .8em; opacity: .55; }
+
+
+/* ───────────────────────── [TOP-BAR] ───────────────────────── */
+.masthead {
+  position: fixed; inset: 0 0 auto 0; z-index: 50; height: var(--head-h);
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-inline: var(--gutter);
+  color: var(--fg); border-bottom: 1px solid transparent;
+  view-transition-name: masthead;   /* keeps the bar perfectly still while pages animate */
+  transition: background-color .45s var(--ease), color .45s var(--ease), border-color .45s var(--ease), backdrop-filter .45s var(--ease);
+}
+html:not([data-view="home"]) .masthead { background: var(--bg-glass); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); }
+html.scrolled:not([data-view="home"]) .masthead { border-bottom-color: var(--line); }
+/* over a photo (home page, or the top of a side) the bar is see-through with white text */
+html[data-view="home"] .masthead,
+html[data-view="gallery"]:not(.past-hero) .masthead { background: transparent; color: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom-color: transparent; }
+
+/* ✏️ [TOP-BAR] Size of "AMJ" (26px) and the space between its letters (.06em). */
+.monogram { font: 400 26px/1 var(--display); letter-spacing: .06em; }
+
+/* ✏️ [TOP-BAR] Menu words: size (11px), letter spacing (.16em), gap between them (clamp). */
+.nav { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 34px); }
+.nav a { position: relative; padding: 8px 0; font: 500 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; opacity: .78; transition: opacity .3s var(--ease); }
+.nav a:hover, .nav a.on { opacity: 1; }
+.nav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .45s var(--ease); }
+.nav a.on::after, .nav a:hover::after { transform: scaleX(1); }
+.menu-btn { display: none; }
+
+
+/* ───────────────────────── [HOME] ───────────────────────── */
+.view-home { height: 100vh; height: 100svh; min-height: 520px; background: #000; }
+
+/* ✏️ [HOME] The line between the two sides: its thickness is the "gap" (2px). Colour = background (#000). */
+.split { display: flex; gap: 2px; height: 100%; background: #000; }
+.side { position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; color: #fff; isolation: isolate; transition: flex-grow var(--hover-ms) var(--ease); }
+
+/* ✏️ [HOME] Hover: the side under the mouse grows to 1.3 and the other shrinks to 0.8.
+   Make the effect stronger with e.g. 1.5 / 0.7, softer with 1.15 / 0.9. */
+@media (hover: hover) and (min-width: 761px) {
+  .split:hover .side { flex-grow: .8; }
+  .split .side:hover { flex-grow: 1.3; }
+}
+.side-media { position: absolute; inset: 0; z-index: -2; background: #111 center / cover no-repeat; }
+.side-media img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transform: scale(1.04); transition: opacity 1.2s var(--ease), transform 2.4s var(--ease);
+  -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none;
+}
+.side-media img.on { opacity: 1; transform: scale(1); }
+.side:hover .side-media img.on { transform: scale(1.025); }
+
+/* ✏️ [HOME] Darkening over the photos so the white text stays readable.
+   The last number (.62) is how dark the bottom gets: raise it for darker, lower for lighter. */
+.side::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 52%, rgba(0,0,0,.62) 100%);
+  transition: background-color var(--hover-ms) var(--ease);
+}
+.split:hover .side:not(:hover)::after { background-color: rgba(0,0,0,.3); }   /* ✏️ how much the OTHER side dims on hover */
+
+.side-label { position: absolute; left: var(--gutter); right: var(--gutter); bottom: clamp(28px, 7vh, 72px); }
+/* ✏️ [HOME] "SIDE A / SIDE B": size 11px, colour = white at 72% (.72). */
+.side-kick { font: 500 11px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.72); }
+/* ✏️ [HOME] The big "Color" / "Black & White" titles: clamp(phone, normal, max). */
+.side-title { width: fit-content; margin: 14px 0 16px; font: 400 clamp(54px, 7.4vw, 132px)/.92 var(--display); letter-spacing: -.005em; text-wrap: balance; text-shadow: 0 2px 28px rgba(0,0,0,.22); }
+/* ✏️ [HOME] "09 FRAMES | 3 SETS": size 11px. */
+.side-meta { font: 500 11px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.8); }
+.side-meta .bar { display: inline-block; margin: 0 .9em; opacity: .55; }
+.side-meta .go { display: inline-block; margin-left: 1.1em; transform: translateX(-6px); opacity: 0; transition: transform .5s var(--ease), opacity .4s var(--ease); }
+.side:hover .side-meta .go, .side:focus-visible .side-meta .go { transform: none; opacity: .9; }
+
+
+/* ───────────────────────── [SIDE-HERO] ───────────────────────── */
+/* ✏️ [SIDE-HERO] Height of the cover band at the top of each side: clamp(min, % of screen height, max). */
+.g-hero { position: relative; height: clamp(360px, 64vh, 700px); overflow: hidden; color: #fff; background: #111; isolation: isolate; }
+.g-hero-media { position: absolute; inset: 0; z-index: -2; background: #111 center / cover no-repeat; }
+.g-hero-media img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .9s var(--ease); -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
+.g-hero-media img.on { opacity: 1; }
+/* ✏️ [SIDE-HERO] Darkening over the cover (top for the menu, bottom for the title). */
+.g-hero::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(0,0,0,.38) 0%, rgba(0,0,0,0) 26%, rgba(0,0,0,0) 48%, rgba(0,0,0,.6) 100%); }
+.g-hero-in { position: absolute; left: 0; right: 0; bottom: clamp(26px, 6vh, 60px); display: flex; align-items: flex-end; justify-content: space-between; gap: 20px 24px; }
+.g-hero .kicker { color: rgba(255,255,255,.75); }
+.g-hero .kicker b { color: #fff; }
+/* ✏️ [SIDE-HERO] The big title on each side: clamp(phone, normal, max). */
+.g-title h1 { width: fit-content; margin-top: 16px; font: 400 clamp(56px, 9.6vw, 156px)/.88 var(--display); letter-spacing: -.01em; text-shadow: 0 2px 28px rgba(0,0,0,.22); }
+
+/* the Color | B&W switch on the cover */
+.flip { position: relative; display: inline-grid; grid-template-columns: 1fr 1fr; flex: 0 0 auto; padding: 4px; border-radius: 999px; background: rgba(0,0,0,.28); box-shadow: inset 0 0 0 1px rgba(255,255,255,.28); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.flip-opt { position: relative; z-index: 1; padding: 10px 18px; text-align: center; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.8); transition: color .45s var(--ease); }
+.flip-opt.on { color: #111; }
+.flip-knob { position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 4px); border-radius: 999px; background: #fff; transition: transform .6s var(--ease); }
+.flip[data-on="bw"] .flip-knob { transform: translateX(100%); }
+
+
+/* ───────────────────────── [SIDE-TABS] ───────────────────────── */
+.tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-block: 14px; margin-bottom: 26px; border-bottom: 1px solid var(--line); }
+.tabs::-webkit-scrollbar { display: none; }
+/* ✏️ [SIDE-TABS] Set names: size 11px, spacing .12em. */
+.tab { padding: 9px 14px; border-radius: 999px; white-space: nowrap; font: 500 11px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mu); transition: color .35s var(--ease), background-color .35s var(--ease); }
+.tab sup { margin-left: 5px; font-size: 9px; letter-spacing: .04em; }
+.tab:hover { color: var(--fg); }
+.tab.on { color: var(--fg); background: var(--chip); box-shadow: inset 0 0 0 1px var(--line); }
+/* ✏️ [SIDE-TABS] The sentence under the tabs (from about.txt in a set folder). */
+.g-desc { margin-top: -8px; margin-bottom: 26px; font: 400 clamp(18px, 1.5vw, 22px)/1.4 var(--display); color: var(--fg-2); }
+.g-empty { padding-block: 80px 120px; text-align: center; font: 500 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: var(--mu); }
+
+
+/* ───────────────────────── [GRID] ─────────────────────────
+   ✏️ [GRID] Row height and the gap between photos are set in assets/js/app.js → search "[GRID]". */
+.grid { position: relative; margin-bottom: clamp(56px, 8vw, 120px); }
+.tile { position: absolute; display: block; overflow: hidden; border-radius: 1px; cursor: zoom-in; background: var(--chip); contain: layout paint; animation: rise .9s var(--ease) both; animation-delay: var(--d, 0ms); }
+.tile::before { content: ""; position: absolute; inset: -12px; background: var(--lq) center / cover no-repeat; filter: blur(12px); transform: scale(1.05); }
+.tile img { position: relative; display: block; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .8s var(--ease), transform 1.4s var(--ease); -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
+.tile img.ld { opacity: 1; }
+/* ✏️ [GRID] How much a photo zooms when the mouse is over it (1.025 = 2.5%). Set 1 for none. */
+.tile:hover img { transform: scale(1.025); }
+.t-cap { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 30px 12px 10px; color: #fff; pointer-events: none; background: linear-gradient(transparent, rgba(0,0,0,.55)); opacity: 0; transform: translateY(6px); transition: opacity .45s var(--ease), transform .55s var(--ease); }
+.t-cap span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font: 500 12.5px/1.3 var(--sans); }
+.tile:hover .t-cap, .tile:focus-visible .t-cap { opacity: 1; transform: none; }
+@media (hover: none) { .t-cap { display: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+
+
+/* ───────────────────────── ABOUT PAGE ───────────────────────── */
+.view-about { padding-top: var(--head-h); }
+.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 34vw); gap: clamp(40px, 6vw, 110px); align-items: start; padding-block: clamp(48px, 10vw, 140px) clamp(48px, 7vw, 100px); }
+.about-text > * { max-width: 760px; }
+/* ✏️ [ABOUT-TITLE] "Hi, I'm Aman.": clamp(phone, normal, max). */
+.about h1 { margin-top: 20px; font: 400 clamp(56px, 8.4vw, 128px)/.92 var(--display); letter-spacing: -.01em; }
+/* ✏️ [ABOUT-TEXT] The paragraph under the heading. */
+.about-lead { margin-top: 30px; font: 400 clamp(22px, 2.1vw, 30px)/1.38 var(--display); color: var(--fg); max-width: 32ch; text-wrap: pretty; }
+/* ✏️ [QUOTE] The quote: size, colour (--fg-2 = softer text) and the thin line on its left. */
+.quote { margin-top: 36px; padding-left: 22px; border-left: 2px solid var(--line); font: 400 clamp(20px, 1.8vw, 26px)/1.4 var(--display); color: var(--fg-2); max-width: 30ch; }
+/* ✏️ [CONTACT] Space above the contact section (first number) and its heading size. */
+.contact { margin-top: clamp(56px, 8vw, 110px); padding-top: 32px; border-top: 1px solid var(--line); }
+.contact h2 { font: 400 clamp(28px, 2.6vw, 38px)/1.1 var(--display); }
+.contact-line { margin-top: 14px; max-width: 54ch; color: var(--fg-2); font-size: 17px; }
+.contact-actions { display: flex; align-items: center; gap: 12px 20px; flex-wrap: wrap; margin-top: 26px; }
+.contact-mail { font-size: 14px; color: var(--mu); }
+.contact-mail .selectable { color: var(--fg); }
+.about-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.about-links:empty { display: none; }
+.about-links a { display: inline-block; padding: 10px 16px; border: 1px solid var(--line); border-radius: 999px; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; transition: background-color .35s var(--ease), color .35s var(--ease); }
+.about-links a:hover { background: var(--fg); color: var(--bg); }
+/* ✏️ [CONTACT] The big dark button: colours come from --fg (button) and --bg (text). */
+.btn { display: inline-flex; align-items: center; gap: 12px; padding: 15px 24px; background: var(--fg); color: var(--bg); border-radius: 999px; font: 500 11.5px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; transition: gap .45s var(--ease), opacity .3s var(--ease), transform .45s var(--ease); }
+.btn:hover { gap: 18px; transform: translateY(-1px); }
+/* ✏️ [FINE-PRINT] The small legal text: size 11.5px. */
+.fine { margin-top: 40px; max-width: 78ch; font-size: 11.5px; line-height: 1.7; color: var(--mu); }
+.fine a { text-decoration: underline; text-underline-offset: 2px; }
+/* ✏️ [ABOUT-PHOTO] Shape of the photo beside the text: 4 / 5 = portrait. Try 1 / 1 (square) or 3 / 2. */
+.about-photo { position: sticky; top: calc(var(--head-h) + 32px); aspect-ratio: 4 / 5; overflow: hidden; border-radius: 2px; background: var(--chip) center / cover no-repeat; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
+
+
+/* ───────────────────────── [FOOTER] ───────────────────────── */
+.foot { border-top: 1px solid var(--line); color: var(--mu); }
+html[data-view="home"] .foot { display: none; }
+.foot-in { display: flex; justify-content: space-between; align-items: center; gap: 10px 28px; flex-wrap: wrap; padding-block: 24px calc(24px + env(safe-area-inset-bottom)); font-size: 13px; }
+.foot a { transition: color .3s var(--ease); }
+.foot a:hover { color: var(--fg); }
+
+
+/* ───────────────────────── [VIEWER] ───────────────────────── */
+html.lb-open, html.lb-open body { overflow: hidden; }
+.lb { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; background: var(--viewer-bg); color: var(--d-ink); animation: lbIn .5s var(--ease) both; }
+.lb.closing { animation: lbOut .38s var(--ease) both; pointer-events: none; }
+.lb:focus { outline: none; }
+@keyframes lbIn { from { opacity: 0; } }
+@keyframes lbOut { to { opacity: 0; } }
+.lb-top { flex: 0 0 auto; height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 10px 0 var(--gutter); }
+.lb-count { display: flex; align-items: baseline; gap: 6px; min-width: 0; font: 400 12px/1 var(--mono); letter-spacing: .08em; }
+.lb-of { color: #55524b; }
+.lb-where { margin-left: 14px; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--d-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lb-actions { display: flex; gap: 2px; flex: 0 0 auto; }
+.lb-btn { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; color: #d6d0c3; transition: background-color .3s var(--ease), color .3s var(--ease); }
+.lb-btn:hover { background: #1c1c1a; color: #fff; }
+.lb-btn svg, .lb-nav svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lb-stage { position: relative; flex: 1 1 auto; min-height: 0; overflow: hidden; touch-action: none; cursor: zoom-in; user-select: none; -webkit-user-select: none; }
+.lb-stage.zoomed { cursor: grab; }
+.lb-stage.dragging { cursor: grabbing; }
+/* ✏️ [VIEWER] Space around the opened photo: top, left/right. */
+#lb-img { position: absolute; top: 12px; left: 72px; width: calc(100% - 144px); height: calc(100% - 24px); object-fit: contain; transform-origin: 50% 50%; will-change: transform; transition: transform .5s var(--ease), opacity .45s var(--ease); pointer-events: none; -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; animation: imgIn .7s var(--ease) both; }
+#lb-img.swap { opacity: 0; }
+@keyframes imgIn { from { opacity: 0; transform: scale(.975); } }
+.lb-stage.dragging #lb-img, .lb-stage.pinching #lb-img { transition: opacity .35s ease; }
+.lb-shield { position: absolute; inset: 0; z-index: 1; -webkit-touch-callout: none; }
+.lb-nav { position: absolute; top: 50%; z-index: 3; width: 46px; height: 46px; margin-top: -23px; border-radius: 50%; display: grid; place-items: center; color: #e6e1d6; background: rgba(24,24,22,.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); opacity: 0; transition: opacity .35s var(--ease), background-color .3s var(--ease); }
+.lb-nav.prev { left: 14px; } .lb-nav.next { right: 14px; }
+.lb-stage:hover .lb-nav, .lb-nav:focus-visible { opacity: 1; }
+.lb-nav:hover { background: rgba(40,40,37,.8); }
+.lb-stage.zoomed .lb-nav { opacity: 0 !important; pointer-events: none; }
+@media (hover: none) { .lb-nav { display: none; } }
+.lb-zoomtag { position: absolute; left: 16px; bottom: 12px; z-index: 3; font: 400 11px/1 var(--mono); color: #cfc9bc; letter-spacing: .1em; opacity: 0; transition: opacity .3s var(--ease); pointer-events: none; }
+.lb-stage.zoomed .lb-zoomtag { opacity: 1; }
+
+/* ✏️ [VIEWER-BAR] The strip under an opened photo. */
+.lb-bar { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 10px 24px; flex-wrap: wrap; min-height: 68px; padding: 12px var(--gutter) calc(12px + env(safe-area-inset-bottom)); }
+.lb-left { min-width: 0; display: flex; align-items: center; gap: 12px 22px; flex-wrap: wrap; }
+/* ✏️ [VIEWER-BAR] The place name: size 15px. */
+.lb-place { font: 500 15px/1.3 var(--sans); color: #efe9de; }
+.lb-place:empty { display: none; }
+.lb-right { display: flex; align-items: center; gap: 12px 18px; flex-wrap: wrap; margin-left: auto; }
+/* ✏️ [VIEWER-BAR] "© 2025 Aman Jaswal. All rights reserved.": size 12.5px. */
+.lb-copy { font-size: 12.5px; color: #8f897d; }
+/* ✏️ [REQUEST-BUTTON] The highlighted "Request to use" button: background, text colour, size. */
+.lb-req { display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px; border-radius: 999px; background: #f2efe8; color: #111; font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; transition: background-color .3s var(--ease), transform .45s var(--ease), box-shadow .45s var(--ease); }
+.lb-req::after { content: "→"; transition: transform .45s var(--ease); }
+.lb-req:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(255, 255, 255, .12); }
+.lb-req:hover::after { transform: translateX(3px); }
+
+/* ✏️ [CAMERA-READOUT] Only shows if config.js → showCameraData: true.
+   Shutter · aperture · ISO · focal length · exposure compensation, in amber "camera display" digits. */
+.lb-cam { display: flex; gap: 6px 18px; flex-wrap: wrap; padding: 9px 14px; border-radius: 10px; background: #050505; box-shadow: inset 0 0 0 1px #262521; }
+.lb-cam span { font: 400 9px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; color: #6a655c; }
+.lb-cam b { display: block; margin-bottom: 4px; font: 500 15px/1 var(--mono); letter-spacing: -.01em; color: var(--amber); text-shadow: 0 0 10px rgba(255,182,72,.4); text-transform: none; }
+
+
+/* ───────────────────────── small notice (copyright, link copied) ───────────────────────── */
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); z-index: 200; max-width: min(92vw, 520px); padding: 13px 18px; border-radius: 14px; background: #171715; color: #eee8dc; box-shadow: 0 18px 50px rgba(0,0,0,.45), inset 0 0 0 1px #2c2b28; font-size: 14px; line-height: 1.45; transform: translate(-50%, 140%); opacity: 0; transition: transform .55s var(--ease), opacity .4s var(--ease); pointer-events: none; }
+.toast.on { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+.toast a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+.noscript { padding: 120px 24px; text-align: center; }
+
+
+/* ───────────────────────── [PAGE-ANIMATION] ─────────────────────────
+   Clicking a side: its photo smoothly grows from half the screen into the cover at the top of
+   that side, and the title glides into place. Going back does the reverse.
+   (Browsers that can't do this, e.g. older Firefox, get a soft fade instead.)
+   ✏️ Speed: config.js → pageTransitionMs. ✏️ Feel: --ease in [SPEED] at the top of this file. */
+::view-transition-group(*) { animation-duration: var(--page-ms); animation-timing-function: var(--ease); }
+/* the rest of the old page fades out while the photo grows; the new page fades in just behind it */
+::view-transition-old(root) { animation: calc(var(--page-ms) * .5) var(--ease) calc(var(--page-ms) * .25) both vtFadeOut; }
+::view-transition-new(root) { animation: calc(var(--page-ms) * .5) var(--ease) calc(var(--page-ms) * .3) both vtFadeIn; }
+/* things that only exist on one side of the change (e.g. the other half of the home page) */
+::view-transition-old(*):only-child { animation: calc(var(--page-ms) * .45) var(--ease) both vtFadeOut; }
+::view-transition-new(*):only-child { animation: calc(var(--page-ms) * .55) var(--ease) calc(var(--page-ms) * .4) both vtFadeIn; }
+/* titles: scale smoothly as one piece of text */
+::view-transition-old(vt-title-color), ::view-transition-new(vt-title-color),
+::view-transition-old(vt-title-bw), ::view-transition-new(vt-title-bw) { height: 100%; width: auto; animation-duration: var(--page-ms); }
+::view-transition-group(vt-hero-color), ::view-transition-group(vt-hero-bw) { overflow: hidden; }
+::view-transition-old(vt-hero-color), ::view-transition-new(vt-hero-color),
+::view-transition-old(vt-hero-bw), ::view-transition-new(vt-hero-bw) { width: 100%; height: 100%; object-fit: cover; animation-duration: var(--page-ms); animation-timing-function: var(--ease); }
+@keyframes vtFadeOut { to { opacity: 0; } }
+@keyframes vtFadeIn { from { opacity: 0; } }
+/* fallback fade for browsers without view transitions */
+html.no-vt .view.enter { animation: viewIn calc(var(--page-ms) * .8) var(--ease) both; }
+@keyframes viewIn { from { opacity: 0; transform: translateY(10px); } }
+
+
+/* ───────────────────────── [PHONES] (screens narrower than 760px) ───────────────────────── */
+@media (max-width: 1000px) {
+  .about { grid-template-columns: 1fr; }
+  .about-photo { display: none; }
+}
+@media (max-width: 760px) {
+  :root { --head-h: 58px; }
+  .monogram { font-size: 23px; }
+  .menu-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 2px; font: 500 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+  .menu-btn i { display: grid; gap: 4px; width: 18px; }
+  .menu-btn i::before, .menu-btn i::after { content: ""; height: 1.5px; background: currentColor; transition: transform .4s var(--ease); }
+  html.menu-open .menu-btn i::before { transform: translateY(2.75px) rotate(45deg); }
+  html.menu-open .menu-btn i::after { transform: translateY(-2.75px) rotate(-45deg); }
+  .nav { position: fixed; inset: var(--head-h) 0 0 0; z-index: 49; flex-direction: column; align-items: stretch; gap: 0; padding: 24px var(--gutter); background: #0b0b0a; color: var(--d-ink); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity .4s var(--ease), transform .5s var(--ease), visibility 0s .5s; }
+  html.menu-open .nav { opacity: 1; visibility: visible; transform: none; transition: opacity .4s var(--ease), transform .5s var(--ease); }
+  html.menu-open .masthead { background: #0b0b0a !important; color: var(--d-ink) !important; }
+  /* ✏️ [PHONES] Menu words on phones: 40px. */
+  .nav a { padding: 18px 0; border-bottom: 1px solid #23221f; font: 400 40px/1 var(--display); letter-spacing: 0; text-transform: none; opacity: 1; }
+  .nav a::after { display: none; }
+  .nav a.on { opacity: .55; }
+
+  .split { flex-direction: column; }
+  /* ✏️ [PHONES] Big titles on the home page on phones. */
+  .side-title { margin: 10px 0 12px; font-size: clamp(46px, 14vw, 72px); }
+  .side-label { bottom: 22px; }
+  .g-hero { height: clamp(320px, 54vh, 520px); }
+  .g-hero-in { flex-direction: column; align-items: flex-start; }
+  .tabs { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); padding-right: 32px; }
+
+  .lb-top { height: 52px; padding-left: 16px; }
+  .lb-where { display: none; }
+  #lb-img { top: 4px; left: 0; width: 100%; height: calc(100% - 8px); }
+  .lb-btn { width: 40px; height: 40px; }
+  .lb-bar { padding-inline: 16px; }
+  .lb-right { width: 100%; justify-content: space-between; margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+}
