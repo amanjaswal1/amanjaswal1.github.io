@@ -14,7 +14,7 @@ window.SITE = {
   /* ───────────── YOUR NAME ───────────── */
 
   // ✏️ EDIT ▸ The letters in the top-left corner of every page.
-  monogram: "AMJ",
+  monogram: "AMJ | Photography",
 
   // ✏️ EDIT ▸ Your first name. Shows as the About page heading: "Hi, I'm Aman."
   firstName: "Aman",
