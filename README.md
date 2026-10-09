@@ -60,10 +60,6 @@ There are no ads, trackers or analytics, and no cookies. Every photograph is © 
 - **IBM**, for [IBM Plex Mono](https://github.com/IBM/plex) (SIL Open Font License 1.1).
 - **[GeoNames](https://www.geonames.org)**, for place data ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)), used through [reverse_geocode](https://github.com/richardpenman/reverse_geocode) by Richard Penman.
 - **[Pillow](https://python-pillow.org)**, **[NumPy](https://numpy.org)** and **[SciPy](https://scipy.org)**, for the image processing and maths.
-- The ideas behind the layout:
-  - D. Hasler & S. Süsstrunk, *Measuring colourfulness in natural images* (2003)
-  - X. Hou & L. Zhang, *Saliency Detection: A Spectral Residual Approach* (CVPR 2007)
-  - D. E. Knuth & M. F. Plass, *Breaking Paragraphs into Lines* (1981)
 - Built and modified using **Claude Opus 5.5** by [Anthropic](https://www.anthropic.com).
 
 ## Licence
