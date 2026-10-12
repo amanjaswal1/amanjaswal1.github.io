@@ -34,6 +34,10 @@ window.SITE = {
   // ✏️ EDIT ▸ The quote on the About page. Put "" (two quotes, nothing inside) to hide it.
   quote: "",
 
+  // ✏️ EDIT ▸ The photo beside the About text (big screens only; phones don't show it).
+  //   Easiest: open the photo on your site → click the 🔗 button (top right) → paste the copied link here.
+  //   Or type its file name, e.g. "canary.jpg".   "color" = your Color cover   "bw" = your B&W cover   "" = no photo
+  aboutPhoto: "color",
 
   /* ───────────── REQUEST FORM (your email stays private) ───────────── */
 
