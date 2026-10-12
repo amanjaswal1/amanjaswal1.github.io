@@ -37,7 +37,7 @@ window.SITE = {
   // ✏️ EDIT ▸ The photo beside the About text (big screens only; phones don't show it).
   //   Easiest: open the photo on your site → click the 🔗 button (top right) → paste the copied link here.
   //   Or type its file name, e.g. "canary.jpg".   "color" = your Color cover   "bw" = your B&W cover   "" = no photo
-  aboutPhoto: "color",
+  aboutPhoto: "",
 
   /* ───────────── REQUEST FORM (your email stays private) ───────────── */
 
