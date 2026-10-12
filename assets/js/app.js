@@ -318,10 +318,25 @@
     grid.style.height = Math.round(y - gap) + "px";
   }
 
-  /* ── ABOUT: your Color cover beside the text on wide screens ── */
+  /* ── ABOUT: the photo beside the text on wide screens. ✏️ Choose it in config.js → aboutPhoto ── */
+  function aboutPick() {
+    var v = CFG.aboutPhoto == null ? "color" : String(CFG.aboutPhoto).trim();
+    if (!v || v.toLowerCase() === "none") return null;                          // "" = no photo
+    var lv = v.toLowerCase();
+    if (lv === "color" || lv === "bw") return coverOf(lv) || coverOf(lv === "color" ? "bw" : "color");
+    var m = /#\/photo\/([\w-]+)/.exec(v);                                        // a link copied from the viewer's 🔗 button
+    if (BYID[m ? m[1] : v]) return BYID[m ? m[1] : v];                           // …or just the photo's id
+    var stem = function (s) { return String(s || "").split("/").pop().replace(/\.[a-z0-9]+$/i, "").toLowerCase(); };
+    for (var i = 0; i < DATA.photos.length; i++)                                 // …or its file name, e.g. "canary.jpg" or "canary"
+      if (DATA.photos[i].file && stem(DATA.photos[i].file) === stem(v)) return DATA.photos[i];
+    if (window.console) console.warn('config.js → aboutPhoto: no photo matches "' + v + '". Showing the Color cover instead.');
+    return coverOf("color") || coverOf("bw");
+  }
   function renderAboutPhoto() {
-    var pick = coverOf("color") || coverOf("bw"), fig = $("#about-photo");
-    if (!pick) { fig.hidden = true; return; }
+    var pick = aboutPick(), fig = $("#about-photo");
+    fig.hidden = !pick;
+    fig.parentNode.style.gridTemplateColumns = pick ? "" : "minmax(0, 1fr)";   // no photo → the text uses the full width
+    if (!pick) return;
     fig.style.backgroundImage = "url(" + pick.lqip + ")";
     fig.innerHTML = '<img alt="" draggable="false" loading="lazy" sizes="34vw" srcset="' + srcset(pick.img) + '" style="object-position:' + focus(pick) + '">';
   }
